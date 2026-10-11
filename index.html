@@ -58,7 +58,7 @@
             /* Hauteur du header pour le padding du body (desktop) */
             --header-height: 5.5rem;
             /* Hauteur fixe des cartes événements (desktop uniquement) */
-            --carte-event-height: 30rem;
+            --carte-event-height: 35rem;
         }
 
         /* =========================================
@@ -487,7 +487,7 @@
         }
 
         /* =========================================
-           CARTE ÉVÉNEMENT — RATIO 2/3 IMAGE, 1/3 TEXTE (DESKTOP)
+           CARTE ÉVÉNEMENT — IMAGE FIXE 2/3, TEXTE FLEXIBLE 1/3
            ========================================= */
         .carte-event {
             background: var(--bg-card);
@@ -510,6 +510,7 @@
             box-shadow: 0 0.625rem 1.5625rem var(--ombre-forte);
         }
 
+        /* Image : hauteur FIXE = 2/3 de la carte, ne varie jamais */
         .carte-event img {
             width: 100%;
             height: 66.666%;
@@ -536,8 +537,9 @@
             background-color: #2b2f33;
         }
 
+        /* Contenu texte : occupe l'espace restant (1/3), s'adapte au contenu */
         .carte-event-contenu {
-            padding: 0.75rem 1rem;
+            padding: 0.75rem 1rem 0.4rem;
             flex: 1 1 33.333%;
             display: flex;
             flex-direction: column;
@@ -1169,7 +1171,7 @@
                 grid-template-columns: 1fr;
             }
 
-            /* Cartes programmation mobile */
+            /* Cartes programmation mobile : image à hauteur fixe en rem */
             .carte-event {
                 height: auto;
                 min-height: 0;
@@ -1183,7 +1185,7 @@
             .carte-event-contenu {
                 flex: 1 1 auto;
                 overflow: visible;
-                padding: 0.9rem 1rem 1rem;
+                padding: 0.9rem 1rem 0.6rem;
             }
 
             .carte-event-date {
@@ -1194,19 +1196,13 @@
                 margin-bottom: 0.35rem;
             }
 
-            /* ===== CORRECTION MOBILE : espace contrôlé ===== */
             .carte-event-desc {
                 margin: 0;
-                margin-bottom: 0.4rem;  /* petit espace avant le bouton */
-            }
-
-            .carte-event-tag {
-                margin-top: 0.5rem;
-                align-self: flex-start;
+                margin-bottom: 0.4rem;
             }
 
             .btn-info-event {
-                margin-top: 0;          /* pas d'espace supplémentaire */
+                margin-top: 0;
                 margin-bottom: 0.2rem;
             }
 
@@ -1337,12 +1333,7 @@
             }
 
             .carte-event-contenu {
-                padding: 0.75rem 0.85rem 0.9rem;
-            }
-
-            .carte-event-tag {
-                font-size: 0.65rem;
-                padding: 0.12rem 0.45rem;
+                padding: 0.75rem 0.85rem 0.4rem;
             }
 
             .btn-info-event {
