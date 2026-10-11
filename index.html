@@ -51,6 +51,9 @@
             --bordure: #eeeeee;
             --ombre: rgba(0, 0, 0, 0.25);
             --ombre-forte: rgba(0, 0, 0, 0.35);
+            /* Couleur des titres de section posés sur l'image de fond */
+            --texte-titre-section: #ffffff;
+            --ombre-titre-section: 0 2px 8px rgba(0, 0, 0, 0.9);
             --transition-theme: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
@@ -79,6 +82,9 @@
             --gris-clair: #34383d;
             --blanc: #3a3f44;
             --texte: #e9ecef;
+            /* En mode sombre, on garde un blanc légèrement adouci */
+            --texte-titre-section: #f8f9fa;
+            --ombre-titre-section: 0 2px 10px rgba(0, 0, 0, 0.95);
         }
 
         /* =========================================
@@ -151,6 +157,16 @@
             color: var(--rose);
             font-size: 1.5rem;
             margin-top: 0.5rem;
+        }
+
+        /* =========================================
+           TITRES DE SECTION POSÉS SUR L'IMAGE DE FOND
+           (Programmation & Le Lieu)
+           ========================================= */
+        .programmation h2,
+        .le-lieu h2 {
+            color: var(--texte-titre-section);
+            text-shadow: var(--ombre-titre-section);
         }
 
         .container {
