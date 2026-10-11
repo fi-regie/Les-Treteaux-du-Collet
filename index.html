@@ -57,8 +57,8 @@
 
             /* Hauteur du header pour le padding du body (desktop) */
             --header-height: 5.5rem;
-            /* Hauteur fixe des cartes événements */
-            --carte-event-height: 35rem;
+            /* Hauteur fixe des cartes événements (desktop uniquement) */
+            --carte-event-height: 37rem;
         }
 
         /* =========================================
@@ -487,7 +487,8 @@
         }
 
         /* =========================================
-           CARTE ÉVÉNEMENT — RATIO 2/3 IMAGE, 1/3 TEXTE
+           CARTE ÉVÉNEMENT — RATIO 2/3 IMAGE, 1/3 TEXTE (DESKTOP)
+           Sur mobile : hauteur auto + image réduite pour tout afficher
            ========================================= */
         .carte-event {
             background: var(--bg-card);
@@ -502,7 +503,7 @@
             flex-direction: column;
             text-shadow: none;
             min-width: 0;
-            height: var(--carte-event-height); /* hauteur fixe */
+            height: var(--carte-event-height); /* hauteur fixe desktop */
         }
 
         .carte-event:hover {
@@ -512,7 +513,7 @@
 
         .carte-event img {
             width: 100%;
-            height: 66.666%;          /* 2/3 de la carte */
+            height: 66.666%;          /* 2/3 de la carte (desktop) */
             flex: 0 0 66.666%;
             object-fit: cover;
             background-color: #ddd;
@@ -538,7 +539,7 @@
 
         .carte-event-contenu {
             padding: 0.75rem 1rem;    /* padding réduit */
-            flex: 1 1 33.333%;        /* 1/3 de la carte */
+            flex: 1 1 33.333%;        /* 1/3 de la carte (desktop) */
             display: flex;
             flex-direction: column;
             min-width: 0;
@@ -550,13 +551,13 @@
             font-weight: bold;
             color: var(--rose);
             font-size: 0.9rem;
-            margin-bottom: 0rem;
+            margin-bottom: -0.7rem;
             line-height: 1.2;
         }
 
         .carte-event-titre {
             font-size: 1.1rem;
-            margin-bottom: 0rem;
+            margin-bottom: -0.5rem;
             color: var(--noir);
             word-wrap: break-word;
             overflow-wrap: break-word;
@@ -1109,7 +1110,9 @@
             /* Ajustement de la hauteur du header sur mobile */
             :root {
                 --header-height: 4.5rem;
-                --carte-event-height: 22rem;
+                /* Sur mobile, on abandonne la hauteur fixe pour que tout le
+                   contenu (bouton + tag) soit visible. */
+                --carte-event-height: auto;
             }
 
             /* Header mobile */
@@ -1181,6 +1184,49 @@
             /* Grilles */
             .grille-evenements {
                 grid-template-columns: 1fr;
+            }
+
+            /* ===== CORRECTION CARTES PROGRAMMATION MOBILE =====
+               Avant : image 2/3 + contenu 1/3 dans une hauteur fixe
+               → le bouton et le tag étaient coupés.
+               Après : image à hauteur fixe raisonnable + contenu auto. */
+            .carte-event {
+                height: auto;
+                min-height: 0;
+            }
+
+            .carte-event img {
+                height: 12rem;
+                flex: 0 0 12rem;
+            }
+
+            .carte-event-contenu {
+                flex: 1 1 auto;
+                overflow: visible;
+                padding: 0.9rem 1rem 1rem;
+            }
+
+            .carte-event-date {
+                margin-bottom: 0.1rem;
+            }
+
+            .carte-event-titre {
+                margin-bottom: 0.35rem;
+            }
+
+            .carte-event-desc {
+                flex-grow: 0;
+                margin-bottom: 0.5rem;
+            }
+
+            .carte-event-tag {
+                margin-top: 0.5rem;
+                align-self: flex-start;
+            }
+
+            .btn-info-event {
+                margin-top: 0.4rem;
+                margin-bottom: 0.2rem;
             }
 
             /* Hero */
@@ -1297,11 +1343,31 @@
         @media (max-width: 400px) {
             :root {
                 --header-height: 4rem;
-                --carte-event-height: 20rem;
+                --carte-event-height: auto;
             }
 
             html {
                 font-size: 85%;
+            }
+
+            /* Ajustements complémentaires cartes */
+            .carte-event img {
+                height: 10rem;
+                flex: 0 0 10rem;
+            }
+
+            .carte-event-contenu {
+                padding: 0.75rem 0.85rem 0.9rem;
+            }
+
+            .carte-event-tag {
+                font-size: 0.65rem;
+                padding: 0.12rem 0.45rem;
+            }
+
+            .btn-info-event {
+                font-size: 0.6rem;
+                padding: 0.25rem 0.6rem;
             }
 
             .hero h1 {
@@ -1314,10 +1380,6 @@
 
             .carte-blanche {
                 padding: 1rem;
-            }
-
-            .carte-event-contenu {
-                padding: 0.6rem 0.75rem;
             }
 
             .carte-event-titre {
