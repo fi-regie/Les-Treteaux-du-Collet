@@ -58,7 +58,7 @@
             /* Hauteur du header pour le padding du body (desktop) */
             --header-height: 5.5rem;
             /* Hauteur fixe des cartes événements (desktop uniquement) */
-            --carte-event-height: 37rem;
+            --carte-event-height: 30rem;
         }
 
         /* =========================================
@@ -488,7 +488,6 @@
 
         /* =========================================
            CARTE ÉVÉNEMENT — RATIO 2/3 IMAGE, 1/3 TEXTE (DESKTOP)
-           Sur mobile : hauteur auto + image réduite pour tout afficher
            ========================================= */
         .carte-event {
             background: var(--bg-card);
@@ -503,7 +502,7 @@
             flex-direction: column;
             text-shadow: none;
             min-width: 0;
-            height: var(--carte-event-height); /* hauteur fixe desktop */
+            height: var(--carte-event-height);
         }
 
         .carte-event:hover {
@@ -513,7 +512,7 @@
 
         .carte-event img {
             width: 100%;
-            height: 66.666%;          /* 2/3 de la carte (desktop) */
+            height: 66.666%;
             flex: 0 0 66.666%;
             object-fit: cover;
             background-color: #ddd;
@@ -538,8 +537,8 @@
         }
 
         .carte-event-contenu {
-            padding: 0.75rem 1rem;    /* padding réduit */
-            flex: 1 1 33.333%;        /* 1/3 de la carte (desktop) */
+            padding: 0.75rem 1rem;
+            flex: 1 1 33.333%;
             display: flex;
             flex-direction: column;
             min-width: 0;
@@ -557,7 +556,7 @@
 
         .carte-event-titre {
             font-size: 1.1rem;
-            margin-bottom: -0.5rem;
+            margin-bottom: 0.5rem;
             color: var(--noir);
             word-wrap: break-word;
             overflow-wrap: break-word;
@@ -567,28 +566,15 @@
         .carte-event-desc {
             font-size: 0.85rem;
             color: var(--texte-secondaire);
-            flex-grow: 1;
             word-wrap: break-word;
             overflow-wrap: break-word;
             line-height: 1.35;
-            margin-bottom: 0.25rem;
-        }
-
-        .carte-event-tag {
-            display: inline-block;
-            background: var(--jaune);
-            color: #1e1e1e;
-            padding: 0.15rem 0.5rem;
-            border-radius: 0.9375rem;
-            font-size: 0.7rem;
-            font-weight: bold;
-            margin-top: 0.35rem;
-            align-self: flex-start;
+            margin: 0;           
         }
 
         .btn-info-event {
             display: inline-block;
-            margin-top: 0.5rem;
+            margin-top: 1rem;      
             padding: 0.3rem 0.7rem;
             background-color: var(--rose);
             color: var(--blanc);
@@ -1107,11 +1093,8 @@
         }
 
         @media (max-width: 768px) {
-            /* Ajustement de la hauteur du header sur mobile */
             :root {
                 --header-height: 4.5rem;
-                /* Sur mobile, on abandonne la hauteur fixe pour que tout le
-                   contenu (bouton + tag) soit visible. */
                 --carte-event-height: auto;
             }
 
@@ -1186,10 +1169,7 @@
                 grid-template-columns: 1fr;
             }
 
-            /* ===== CORRECTION CARTES PROGRAMMATION MOBILE =====
-               Avant : image 2/3 + contenu 1/3 dans une hauteur fixe
-               → le bouton et le tag étaient coupés.
-               Après : image à hauteur fixe raisonnable + contenu auto. */
+            /* Cartes programmation mobile */
             .carte-event {
                 height: auto;
                 min-height: 0;
@@ -1214,9 +1194,10 @@
                 margin-bottom: 0.35rem;
             }
 
+            /* ===== CORRECTION MOBILE : espace contrôlé ===== */
             .carte-event-desc {
-                flex-grow: 0;
-                margin-bottom: 0.5rem;
+                margin: 0;
+                margin-bottom: 0.4rem;  /* petit espace avant le bouton */
             }
 
             .carte-event-tag {
@@ -1225,7 +1206,7 @@
             }
 
             .btn-info-event {
-                margin-top: 0.4rem;
+                margin-top: 0;          /* pas d'espace supplémentaire */
                 margin-bottom: 0.2rem;
             }
 
@@ -1350,7 +1331,6 @@
                 font-size: 85%;
             }
 
-            /* Ajustements complémentaires cartes */
             .carte-event img {
                 height: 10rem;
                 flex: 0 0 10rem;
@@ -1478,7 +1458,6 @@
                         <div class="carte-event-date">Vendredi 2 - 20h30</div>
                         <h4 class="carte-event-titre">Scène Ouverte</h4>
                         <p class="carte-event-desc">10 minutes pour entrer dans l'histoire.</p>
-                        <span class="carte-event-tag">Théâtre</span>
                     </div>
                 </div>
 
@@ -1490,7 +1469,6 @@
                         <h4 class="carte-event-titre">La question de la propriété</h4>
                         <p class="carte-event-desc">Repas (sur réservation) + Film + Débat.</p>
                         <button class="btn-info-event" onclick="openModal('modal-propriete')">En savoir plus</button>
-                        <span class="carte-event-tag">Débat</span>
                     </div>
                 </div>
 
@@ -1502,7 +1480,6 @@
                         <h4 class="carte-event-titre">STAGE Théâtre-Forum</h4>
                         <p class="carte-event-desc">Théâtre des Opprimés. Un outil de dialogue communautaire.</p>
                         <button class="btn-info-event" onclick="openModal('modal-stage')">En savoir plus</button>
-                        <span class="carte-event-tag">Stage</span>
                     </div>
                 </div>
 
@@ -1512,7 +1489,6 @@
                         <div class="carte-event-date">Dimanche 18 - 18h-20h</div>
                         <h4 class="carte-event-titre">ÉCHECS</h4>
                         <p class="carte-event-desc">Découverte, initiation, perfectionnement.</p>
-                        <span class="carte-event-tag">Atelier</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1522,7 +1498,6 @@
                         <div class="carte-event-date">Samedi 31 - 20h30</div>
                         <h4 class="carte-event-titre">CHTOLÔGO</h4>
                         <p class="carte-event-desc">Concert loufopoetikopolitik.</p>
-                        <span class="carte-event-tag">Concert</span>
                     </div>
                 </div>
             </div>
@@ -1537,7 +1512,6 @@
                         <div class="carte-event-date">Vendredi 4 - 20h30</div>
                         <h4 class="carte-event-titre">Scène Ouverte</h4>
                         <p class="carte-event-desc">10 minutes pour entrer dans l'histoire. Ouverture 19h.</p>
-                        <span class="carte-event-tag">Théâtre</span>
                     </div>
                 </div>
 
@@ -1547,7 +1521,6 @@
                         <div class="carte-event-date">Dimanche 6 - 17h</div>
                         <h4 class="carte-event-titre">ÉCHECS</h4>
                         <p class="carte-event-desc">Découverte, initiation, perfectionnement.</p>
-                        <span class="carte-event-tag">Atelier</span>
                     </div>
                 </div>
 
@@ -1559,7 +1532,6 @@
                         <h4 class="carte-event-titre">Madame Pan et ses Troglydytes</h4>
                         <p class="carte-event-desc">Théâtre. Coup de soutien aux Tréteaux.</p>
                         <button class="btn-info-event" onclick="openModal('modal-madame-pan')">En savoir plus</button>
-                        <span class="carte-event-tag">Théâtre</span>
                     </div>
                 </div>
 
@@ -1570,7 +1542,6 @@
                         <div class="carte-event-date">Mercredi 16 - 18h30</div>
                         <h4 class="carte-event-titre">CINÉ-PHILO</h4>
                         <p class="carte-event-desc">Film, débat et repas partagé.</p>
-                        <span class="carte-event-tag">Cinéma</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1580,7 +1551,6 @@
                         <div class="carte-event-date">Samedi 19 - 21h</div>
                         <h4 class="carte-event-titre">JEWA (rap-ragga)</h4>
                         <p class="carte-event-desc">Concert. Énergie garantie !</p>
-                        <span class="carte-event-tag">Concert</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1589,7 +1559,6 @@
                         <div class="carte-event-date">Dimanche 20 - 17h</div>
                         <h4 class="carte-event-titre">ÉCHECS</h4>
                         <p class="carte-event-desc">Découverte, initiation, perfectionnement.</p>
-                        <span class="carte-event-tag">Atelier</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1599,7 +1568,6 @@
                         <div class="carte-event-date">Mercredi 23 - 18h-20h</div>
                         <h4 class="carte-event-titre">ARPENTAGE du livre "Résister"</h4>
                         <p class="carte-event-desc">Lecture collective de Salomé Saqué, suivie d'un repas partagé.</p>
-                        <span class="carte-event-tag">Rencontre</span>
                     </div>
                 </div>
             </div>
@@ -1614,7 +1582,6 @@
                         <h4 class="carte-event-titre">Triple Scott</h4>
                         <p class="carte-event-desc">Chanson française et jazz.</p>
                         <button class="btn-info-event" onclick="openModal('modal-triple-scott')">En savoir plus</button>
-                        <span class="carte-event-tag">Concert</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1624,7 +1591,6 @@
                         <h4 class="carte-event-titre">Paniyiri</h4>
                         <p class="carte-event-desc">Musique grecque envoûtante.</p>
                         <button class="btn-info-event" onclick="openModal('modal-paniyiri')">En savoir plus</button>
-                        <span class="carte-event-tag">Musique</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1634,7 +1600,6 @@
                         <h4 class="carte-event-titre">La Mondina</h4>
                         <p class="carte-event-desc">Chanson réaliste. Concert au profit du rachat des Tréteaux.</p>
                         <button class="btn-info-event" onclick="openModal('modal-la-mondina')">En savoir plus</button>
-                        <span class="carte-event-tag">Concert</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1644,7 +1609,6 @@
                         <h4 class="carte-event-titre">Zeuplèce to Death / Le Discours du Chef Seattle</h4>
                         <p class="carte-event-desc">Clown puis causerie avec Eric Derrien.</p>
                         <button class="btn-info-event" onclick="openModal('modal-zeuplace')">En savoir plus</button>
-                        <span class="carte-event-tag">Théâtre</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1654,7 +1618,6 @@
                         <h4 class="carte-event-titre">Nomade</h4>
                         <p class="carte-event-desc">Dîner / Chanson française.</p>
                         <button class="btn-info-event" onclick="openModal('modal-nomade')">En savoir plus</button>
-                        <span class="carte-event-tag">Concert</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1664,7 +1627,6 @@
                         <h4 class="carte-event-titre">Marie Baxerres</h4>
                         <p class="carte-event-desc">Chanson "Raw and Wild".</p>
                         <button class="btn-info-event" onclick="openModal('modal-marie-baxerres')">En savoir plus</button>
-                        <span class="carte-event-tag">Concert</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1674,7 +1636,6 @@
                         <h4 class="carte-event-titre">On l'a brun mérité</h4>
                         <p class="carte-event-desc">Théâtre par le Collectif Lakolok.</p>
                         <button class="btn-info-event" onclick="openModal('modal-on-la-brun-merite')">En savoir plus</button>
-                        <span class="carte-event-tag">Théâtre</span>
                     </div>
                 </div>
             </div>
@@ -1690,7 +1651,6 @@
                         <h4 class="carte-event-titre">Scène Ouverte</h4>
                         <p class="carte-event-desc">10 minutes pour entrer dans l'histoire. Venez nombreux partager un
                             moment unique.</p>
-                        <span class="carte-event-tag">Théâtre</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1700,7 +1660,6 @@
                         <div class="carte-event-date">Samedi 4 - 21h</div>
                         <h4 class="carte-event-titre">Soirée ESSEIROT</h4>
                         <p class="carte-event-desc">Une soirée conviviale et culturelle à ne pas manquer.</p>
-                        <span class="carte-event-tag">Soirée</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1710,7 +1669,6 @@
                         <div class="carte-event-date">Mercredi 8 - 21h</div>
                         <h4 class="carte-event-titre">Fanfare Le Grand Boucan</h4>
                         <p class="carte-event-desc">Une fanfare explosive pour animer la soirée !</p>
-                        <span class="carte-event-tag">Musique</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1720,7 +1678,6 @@
                         <div class="carte-event-date">Vendredi 10 - 21h</div>
                         <h4 class="carte-event-titre">Concert Poétique</h4>
                         <p class="carte-event-desc">Un voyage entre mots et mélodies.</p>
-                        <span class="carte-event-tag">Concert</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1730,7 +1687,6 @@
                         <div class="carte-event-date">Samedi 11 - 21h</div>
                         <h4 class="carte-event-titre">Matin Brun</h4>
                         <p class="carte-event-desc">Théâtre-Débat par la Compagnie ToutCour.</p>
-                        <span class="carte-event-tag">Théâtre</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1740,7 +1696,6 @@
                         <div class="carte-event-date">Samedi 18 - 20h</div>
                         <h4 class="carte-event-titre">Histoires & Chansons de nos Montagnes</h4>
                         <p class="carte-event-desc">Conteur/musicien avec Paul Roy.</p>
-                        <span class="carte-event-tag">Conte</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1750,7 +1705,6 @@
                         <div class="carte-event-date">Jeudi 23 - 21h</div>
                         <h4 class="carte-event-titre">Délires Flagrants</h4>
                         <p class="carte-event-desc">Lecture théâtralisée.</p>
-                        <span class="carte-event-tag">Lecture</span>
                     </div>
                 </div>
                 <div class="carte-event">
@@ -1760,7 +1714,6 @@
                         <div class="carte-event-date">Vendredi 24 - 21h</div>
                         <h4 class="carte-event-titre">Concert Jazz Swing Pulse</h4>
                         <p class="carte-event-desc">Concert de jazz pour clôturer le mois en beauté.</p>
-                        <span class="carte-event-tag">Concert</span>
                     </div>
                 </div>
             </div>
