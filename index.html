@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Les Tréteaux du Collet - Théâtre associatif en Cévennes</title>
     <link rel="icon" type="image/png"
         href="https://raw.githubusercontent.com/fi-regie/Les-Treteaux-du-Collet/main/images/head.png">
@@ -15,6 +15,7 @@
            ========================================= */
         html {
             font-size: 90%;
+            overflow-x: hidden;
         }
 
         /* =========================================
@@ -32,8 +33,6 @@
             --font-titre: 'Georgia', serif;
             --font-texte: 'Helvetica Neue', Arial, sans-serif;
 
-            /* Variables de thème (mode clair par défaut) */
-            /* TOUTES LES SECTIONS SONT TRANSPARENTES */
             --bg-body: transparent;
             --bg-header: rgba(30, 30, 30, 0.92);
             --bg-card: rgba(255, 255, 255, 0.92);
@@ -51,7 +50,6 @@
             --bordure: #eeeeee;
             --ombre: rgba(0, 0, 0, 0.25);
             --ombre-forte: rgba(0, 0, 0, 0.35);
-            /* Couleur des titres de section posés sur l'image de fond */
             --texte-titre-section: #ffffff;
             --ombre-titre-section: 0 2px 8px rgba(0, 0, 0, 0.9);
             --transition-theme: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
@@ -82,14 +80,19 @@
             --gris-clair: #34383d;
             --blanc: #3a3f44;
             --texte: #e9ecef;
-            /* En mode sombre, on garde un blanc légèrement adouci */
             --texte-titre-section: #f8f9fa;
             --ombre-titre-section: 0 2px 10px rgba(0, 0, 0, 0.95);
         }
 
         /* =========================================
-           IMAGE DE FOND FIXE SUR LE BODY
+           RESET & BASE
            ========================================= */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: var(--font-texte);
             color: var(--texte-principal);
@@ -98,8 +101,11 @@
             font-size: 1rem;
             transition: var(--transition-theme);
             min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            max-width: 100vw;
 
-            /* Image de fond fixe qui couvre tout le body */
             background-image: url('https://raw.githubusercontent.com/fi-regie/Les-Treteaux-du-Collet/main/images/Ente%CC%82te.jpg');
             background-size: cover;
             background-position: center center;
@@ -107,21 +113,11 @@
             background-repeat: no-repeat;
             background-color: #2b2f33;
 
-            /* Ombre sur le texte pour la lisibilité sur l'image */
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
 
         body.dark-mode {
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Fallback pour les navigateurs mobiles */
-        @media (max-width: 768px) {
-            body {
-                background-attachment: scroll;
-                background-size: cover;
-                background-position: center top;
-            }
         }
 
         a {
@@ -159,10 +155,6 @@
             margin-top: 0.5rem;
         }
 
-        /* =========================================
-           TITRES DE SECTION POSÉS SUR L'IMAGE DE FOND
-           (Programmation & Le Lieu)
-           ========================================= */
         .programmation h2,
         .le-lieu h2 {
             color: var(--texte-titre-section);
@@ -170,6 +162,7 @@
         }
 
         .container {
+            width: 100%;
             max-width: 75rem;
             margin: 0 auto;
             padding: 0 1.25rem;
@@ -223,12 +216,15 @@
             box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.3);
             transition: var(--transition-theme);
             text-shadow: none;
+            width: 100%;
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .logo {
@@ -239,6 +235,7 @@
             display: flex;
             align-items: center;
             gap: 0.625rem;
+            flex-shrink: 0;
         }
 
         body.dark-mode .logo {
@@ -255,17 +252,25 @@
             color: #e67e22;
         }
 
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
             gap: 1.25rem;
             align-items: center;
+            margin: 0;
+            padding: 0;
         }
 
         nav a {
             color: var(--blanc);
             font-weight: 500;
             transition: color 0.3s;
+            white-space: nowrap;
         }
 
         body.dark-mode nav a {
@@ -280,6 +285,16 @@
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--blanc);
+            background: none;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            line-height: 1;
+            order: 2;
+        }
+
+        body.dark-mode .menu-toggle {
+            color: #f8f9fa;
         }
 
         /* =========================================
@@ -297,7 +312,6 @@
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            margin-left: 1.25rem;
             white-space: nowrap;
             font-weight: 500;
             font-family: var(--font-texte);
@@ -324,48 +338,53 @@
         }
 
         /* =========================================
-           HERO SECTION
+           HERO SECTION - CORRIGÉE POUR MOBILE
            ========================================= */
         .hero {
-            /* Transparent : c'est l'image du body qui apparaît */
-            height: 65vh;
+            min-height: 65vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: var(--blanc);
-            padding: 0 1.25rem;
+            padding: 2rem 1.25rem;
             position: relative;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .hero-content {
             max-width: 50rem;
+            width: 100%;
             z-index: 2;
             display: flex;
             flex-direction: column;
-            height: 100%;
-            padding: 2.5rem 0;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem 0;
         }
 
-        .hero-buttons {
-            margin-top: auto;
-            display: flex;
-            gap: 0.9375rem;
-            justify-content: center;
-            flex-wrap: wrap;
+        .hero-texte {
+            width: 100%;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: clamp(2rem, 8vw, 4rem);
             color: var(--blanc);
             margin-bottom: 1rem;
             text-shadow: 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.8);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            margin-bottom: 0;
             text-shadow: 0.0625rem 0.0625rem 0.25rem rgba(0, 0, 0, 0.8);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         /* =========================================
@@ -388,12 +407,14 @@
             margin: 0 auto;
             transition: var(--transition-theme);
             text-shadow: none;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
 
         .carte-blanche h2 {
             text-align: left;
             margin-bottom: 1.5rem;
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 5vw, 2rem);
         }
 
         .carte-blanche h2::after {
@@ -436,7 +457,7 @@
 
         .mois-titre {
             text-align: center;
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 5vw, 2rem);
             color: var(--rose);
             margin: 3.125rem 0 1.25rem;
             text-transform: uppercase;
@@ -463,6 +484,7 @@
             display: flex;
             flex-direction: column;
             text-shadow: none;
+            min-width: 0;
         }
 
         .carte-event:hover {
@@ -478,9 +500,6 @@
             cursor: pointer;
         }
 
-        /* =========================================
-           CARTE IMAGE SEULE (Programmation Octobre)
-           ========================================= */
         .carte-event-image-seule {
             border-top: none;
         }
@@ -501,6 +520,7 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            min-width: 0;
         }
 
         .carte-event-date {
@@ -514,12 +534,16 @@
             font-size: 1.2rem;
             margin-bottom: 0.625rem;
             color: var(--noir);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .carte-event-desc {
             font-size: 0.9rem;
             color: var(--texte-secondaire);
             flex-grow: 1;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .carte-event-tag {
@@ -534,7 +558,6 @@
             align-self: flex-start;
         }
 
-        /* Bouton "En savoir plus" dans les cartes événement */
         .btn-info-event {
             display: inline-block;
             margin-top: 0.9375rem;
@@ -574,13 +597,12 @@
             align-items: center;
         }
 
-        /* Carte de la section "Le Lieu" */
         .le-lieu-carte {
             padding: 2rem;
         }
 
         .le-lieu-carte h3 {
-            font-size: 1.8rem;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
             color: var(--rose);
             margin-bottom: 1rem;
         }
@@ -655,11 +677,13 @@
             padding: 1.875rem;
             border-radius: 0.625rem;
             text-shadow: none;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
 
         .projet-texte h3 {
             color: var(--jaune);
-            font-size: 1.8rem;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
             margin-bottom: 0.9375rem;
         }
 
@@ -675,6 +699,7 @@
         .projet-texte ul {
             list-style: none;
             margin-bottom: 1.25rem;
+            padding-left: 0;
         }
 
         .projet-texte ul li {
@@ -701,6 +726,8 @@
             border-left: 0.3125rem solid var(--rose);
             transition: var(--transition-theme);
             text-shadow: none;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
 
         .faq-box h4 {
@@ -742,6 +769,8 @@
             font-size: 0.8rem;
             transition: width 1.5s ease-in-out;
             text-shadow: none;
+            white-space: nowrap;
+            overflow: hidden;
         }
 
         /* =========================================
@@ -816,7 +845,7 @@
         }
 
         /* =========================================
-           MODAL (APERÇU)
+           MODAL
            ========================================= */
         .modal {
             display: none;
@@ -854,6 +883,8 @@
             box-shadow: 0 0.625rem 2.5rem rgba(0, 0, 0, 0.5);
             transform: scale(0.9);
             transition: transform 0.3s ease, background-color 0.4s ease, color 0.4s ease;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
 
         .modal.active .modal-contenu {
@@ -882,7 +913,7 @@
 
         .modal-contenu h2 {
             text-align: left;
-            font-size: 1.8rem;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
             margin-bottom: 1.5rem;
             color: var(--rose);
             padding-right: 2.5rem;
@@ -893,7 +924,7 @@
         }
 
         .modal-contenu h3 {
-            font-size: 1.4rem;
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
             color: var(--noir);
             margin-top: 1.5rem;
             margin-bottom: 0.75rem;
@@ -984,6 +1015,8 @@
             display: block;
             color: var(--texte-footer);
             transition: color 0.3s;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
 
         .footer-col a:hover {
@@ -1040,41 +1073,48 @@
                 order: -1;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
             .grille-evenements {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
+            /* Header mobile */
             .header-content {
-                flex-direction: column;
-                gap: 0.9375rem;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
             }
 
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 0.625rem;
+            .logo {
+                font-size: 1.3rem;
+                flex: 1;
+                min-width: 0;
+            }
+
+            .logo img {
+                height: 2.5rem;
+            }
+
+            .logo span {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
             .menu-toggle {
                 display: block;
-                position: absolute;
-                top: 1.25rem;
-                right: 1.25rem;
+                order: 2;
+                flex-shrink: 0;
             }
 
             nav {
                 display: none;
                 width: 100%;
+                order: 3;
+                flex-basis: 100%;
             }
 
             nav.active {
@@ -1083,38 +1123,175 @@
 
             nav ul {
                 flex-direction: column;
-                align-items: center;
+                align-items: stretch;
                 padding-top: 0.9375rem;
+                gap: 0.5rem;
+                width: 100%;
+            }
+
+            nav ul li {
+                width: 100%;
+                text-align: center;
+            }
+
+            nav a {
+                display: block;
+                padding: 0.5rem 0;
+                white-space: normal;
             }
 
             .theme-toggle {
-                margin-left: 0;
-                margin-top: 0.5rem;
+                margin: 0.5rem auto 0;
+                justify-content: center;
             }
 
+            /* Grilles */
             .grille-evenements {
                 grid-template-columns: 1fr;
             }
 
+            /* Hero */
+            .hero {
+                min-height: 50vh;
+                padding: 1.5rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: clamp(1.6rem, 7vw, 2.2rem);
+            }
+
+            .hero p {
+                font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+            }
+
+            /* Cartes */
             .carte-blanche {
-                padding: 1.5625rem;
+                padding: 1.25rem;
             }
 
-            .modal-contenu {
-                padding: 1.5625rem;
-            }
-
-            .modal-contenu h2 {
+            .carte-blanche h2 {
                 font-size: 1.4rem;
             }
 
-            .modal-contenu h3 {
-                font-size: 1.15rem;
+            .carte-blanche p {
+                font-size: 1rem;
             }
 
-            /* Sur mobile, l'image de fond défile avec le contenu */
+            .carte-event-image-seule img {
+                min-height: 12rem;
+            }
+
+            /* Sections */
+            .programmation,
+            .le-lieu,
+            .projet {
+                padding: 3rem 0;
+            }
+
+            .mois-titre {
+                font-size: 1.4rem;
+                letter-spacing: 0.0625rem;
+            }
+
+            /* Projet */
+            .projet-texte,
+            .faq-box {
+                padding: 1.25rem;
+            }
+
+            .barre-remplie {
+                font-size: 0.65rem;
+                padding-right: 0.3rem;
+            }
+
+            /* Modal */
+            .modal-contenu {
+                padding: 1.5rem;
+                max-height: 85vh;
+            }
+
+            .modal-contenu h2 {
+                font-size: 1.3rem;
+            }
+
+            .modal-contenu h3 {
+                font-size: 1.1rem;
+            }
+
+            .modal-contenu p,
+            .modal-contenu ul li {
+                font-size: 0.95rem;
+            }
+
+            .modal-close {
+                top: 0.5rem;
+                right: 0.8rem;
+                font-size: 2rem;
+            }
+
+            /* Lightbox */
+            .lightbox-close {
+                top: 0.5rem;
+                right: 1rem;
+                font-size: 2.5rem;
+            }
+
+            .lightbox img {
+                max-width: 95%;
+                max-height: 75vh;
+            }
+
+            .lightbox-caption {
+                font-size: 0.95rem;
+            }
+
+            /* Footer */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            /* Image de fond */
             body {
                 background-attachment: scroll;
+                background-size: cover;
+                background-position: center top;
+            }
+        }
+
+        @media (max-width: 400px) {
+            html {
+                font-size: 85%;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .carte-blanche {
+                padding: 1rem;
+            }
+
+            .carte-event-contenu {
+                padding: 1rem;
+            }
+
+            .logo span {
+                font-size: 1rem;
+            }
+
+            .barre-remplie {
+                font-size: 0.55rem;
+                padding-right: 0.2rem;
             }
         }
     </style>
@@ -1130,7 +1307,8 @@
                     alt="Logo Les Tréteaux du Collet">
                 <span>Les Tréteaux du Collet</span>
             </div>
-            <div class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('active')">☰</div>
+            <button class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('active')"
+                aria-label="Menu">☰</button>
             <nav>
                 <ul>
                     <li><a href="#accueil">Accueil</a></li>
@@ -1164,9 +1342,13 @@
         <div class="container">
             <div class="carte-blanche">
                 <h2>Le Collet, un lieu à préserver</h2>
-                <p>Depuis 15 ans, le mas du Collet en Hautes Cévennes est un espace culturel et de rencontre unique, animé par Anne et Denis Coutaudier. Aujourd'hui, ce lieu est en vente. Un groupe d'habitants souhaite le racheter collectivement pour pérenniser son esprit libre et pirate.</p>
-                <p>L'association <strong>Les Amis des Tréteaux</strong> propose une programmation foisonnante : théâtre, ateliers, chorale, concerts, cinéma, jeux de société...</p>
-                <p>Pour que ce lieu vive et reste accessible à toutes et tous, nous avons besoin de vous. Récoltons ensemble les fonds nécessaires pour acheter Le Collet en propriété collective.</p>
+                <p>Depuis 15 ans, le mas du Collet en Hautes Cévennes est un espace culturel et de rencontre unique,
+                    animé par Anne et Denis Coutaudier. Aujourd'hui, ce lieu est en vente. Un groupe d'habitants
+                    souhaite le racheter collectivement pour pérenniser son esprit libre et pirate.</p>
+                <p>L'association <strong>Les Amis des Tréteaux</strong> propose une programmation foisonnante : théâtre,
+                    ateliers, chorale, concerts, cinéma, jeux de société...</p>
+                <p>Pour que ce lieu vive et reste accessible à toutes et tous, nous avons besoin de vous. Récoltons
+                    ensemble les fonds nécessaires pour acheter Le Collet en propriété collective.</p>
             </div>
         </div>
     </section>
@@ -1396,7 +1578,8 @@
                     <div class="carte-event-contenu">
                         <div class="carte-event-date">Vendredi 3 - 21h</div>
                         <h4 class="carte-event-titre">Scène Ouverte</h4>
-                        <p class="carte-event-desc">10 minutes pour entrer dans l'histoire. Venez nombreux partager un moment unique.</p>
+                        <p class="carte-event-desc">10 minutes pour entrer dans l'histoire. Venez nombreux partager un
+                            moment unique.</p>
                         <span class="carte-event-tag">Théâtre</span>
                     </div>
                 </div>
@@ -1481,10 +1664,15 @@
             <div class="le-lieu-grid">
                 <div class="carte-blanche le-lieu-carte">
                     <h3>Un mas familial, un lieu culturel</h3>
-                    <p>Le Collet, c'est un mas familial qui est aussi depuis 15 ans un lieu culturel et de rencontre en Hautes Cévennes (les Tréteaux du Collet).</p>
-                    <p>Anne et Denis Coutaudier ont créé et animé pendant de nombreuses années cet endroit à part, un peu pirate et très libre. Des habitants de la vallée (et d'un peu plus loin) se plaisent à fréquenter cet espace atypique.</p>
-                    <p>Depuis 2025, l'association <strong>Les Amis des Tréteaux</strong> propose une programmation foisonnante : théâtre, ateliers, chorale, concerts, cinéma, jeux de société...</p>
-                    <p>Aujourd'hui, Le Collet est en vente. Un petit groupe d'habitants du coin souhaite que cet endroit perdure, fidèle à l'esprit qui l'anime depuis sa création.</p>
+                    <p>Le Collet, c'est un mas familial qui est aussi depuis 15 ans un lieu culturel et de rencontre en
+                        Hautes Cévennes (les Tréteaux du Collet).</p>
+                    <p>Anne et Denis Coutaudier ont créé et animé pendant de nombreuses années cet endroit à part, un
+                        peu pirate et très libre. Des habitants de la vallée (et d'un peu plus loin) se plaisent à
+                        fréquenter cet espace atypique.</p>
+                    <p>Depuis 2025, l'association <strong>Les Amis des Tréteaux</strong> propose une programmation
+                        foisonnante : théâtre, ateliers, chorale, concerts, cinéma, jeux de société...</p>
+                    <p>Aujourd'hui, Le Collet est en vente. Un petit groupe d'habitants du coin souhaite que cet endroit
+                        perdure, fidèle à l'esprit qui l'anime depuis sa création.</p>
                 </div>
                 <div class="le-lieu-images">
                     <img src="./images/Histoire%202.jpg" alt="Le mas du Collet dans les Cévennes"
@@ -1500,16 +1688,22 @@
     <section id="projet" class="projet">
         <div class="container">
             <h2>Pour le Collet des Tréteaux</h2>
-            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2.5rem; color: #fff; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">Pour que ce lieu vive, pour qu'il reste accessible à toutes et tous... Nous avons besoin de vous !</p>
+            <p
+                style="text-align: center; font-size: 1.2rem; margin-bottom: 2.5rem; color: #fff; text-shadow: 0 2px 6px rgba(0,0,0,0.9);">
+                Pour que ce lieu vive, pour qu'il reste accessible à toutes et tous... Nous avons besoin de vous !</p>
 
             <div class="projet-grid">
                 <div class="projet-texte">
                     <h3>Le Projet</h3>
-                    <p><strong>Côté scène :</strong> permettre à l'association des Amis des Tréteaux de maintenir ses activités.</p>
-                    <p><strong>Côté mas :</strong> proposer plusieurs nouveaux logements. Denis, qui souhaite rester, pourra être locataire à vie sur les lieux.</p>
-                    <p><strong>Notre objectif :</strong> Récolter, sous forme de dons, la somme nécessaire pour acheter Le Collet en propriété collective. Cela se fera en deux temps :</p>
+                    <p><strong>Côté scène :</strong> permettre à l'association des Amis des Tréteaux de maintenir ses
+                        activités.</p>
+                    <p><strong>Côté mas :</strong> proposer plusieurs nouveaux logements. Denis, qui souhaite rester,
+                        pourra être locataire à vie sur les lieux.</p>
+                    <p><strong>Notre objectif :</strong> Récolter, sous forme de dons, la somme nécessaire pour acheter
+                        Le Collet en propriété collective. Cela se fera en deux temps :</p>
                     <ul>
-                        <li>Mi-juillet 2026 : réunir 15.000€ pour la signature du compromis de vente. <span style="color: var(--vert); font-weight: bold;">FAIT !</span></li>
+                        <li>Mi-juillet 2026 : réunir 15.000€ pour la signature du compromis de vente. <span
+                                style="color: var(--vert); font-weight: bold;">FAIT !</span></li>
                         <li>Septembre 2027 : rassembler 137.000€, prix d'achat du bien avec les frais.</li>
                     </ul>
                     <p>On compte sur vous dès maintenant pour nous aider à réunir les fonds !</p>
@@ -1517,7 +1711,8 @@
                     <div class="barre-progression">
                         <div class="barre-remplie" style="width: 15%;">15 000 € / 137 000 €</div>
                     </div>
-                    <p style="text-align: right; font-size: 0.9rem; color: var(--jaune);">Objectif : 137 000 € pour Septembre 2027</p>
+                    <p style="text-align: right; font-size: 0.9rem; color: var(--jaune);">Objectif : 137 000 € pour
+                        Septembre 2027</p>
 
                     <h3 style="margin-top: 1.875rem;">Comment puis-je donner ?</h3>
                     <ul>
@@ -1526,7 +1721,8 @@
                         <li>Par virement (demandez-nous notre RIB).</li>
                         <li>Par CB (terminal accessible aux Tréteaux).</li>
                     </ul>
-                    <p><em>Les versements sont à faire auprès de l'un des membres fondateurs de l'association. Un reçu vous sera délivré en retour. Même un petit don, c'est beaucoup pour nous !</em></p>
+                    <p><em>Les versements sont à faire auprès de l'un des membres fondateurs de l'association. Un reçu
+                            vous sera délivré en retour. Même un petit don, c'est beaucoup pour nous !</em></p>
                 </div>
 
                 <div class="faq-box">
@@ -1539,13 +1735,18 @@
                     <p>Notre plan B : des prêts à taux 0 auprès d'amis.</p>
 
                     <h4>Que se passe-t-il si l'acquisition du Collet échoue ?</h4>
-                    <p>Si je souhaite être remboursé, je pourrai en faire la demande. Dans tous les cas : les frais déjà engagés sont couverts par les donateurs initiaux, membres fondateurs de l'association.</p>
+                    <p>Si je souhaite être remboursé, je pourrai en faire la demande. Dans tous les cas : les frais déjà
+                        engagés sont couverts par les donateurs initiaux, membres fondateurs de l'association.</p>
 
                     <h4>Comment puis-je m'impliquer autrement ?</h4>
-                    <p>En faisant passer le message autour de moi. Et en rejoignant les groupes de travail de l'association. Bienvenue !</p>
+                    <p>En faisant passer le message autour de moi. Et en rejoignant les groupes de travail de
+                        l'association. Bienvenue !</p>
 
                     <h4>Qu'est-ce que la propriété collective sans but lucratif ?</h4>
-                    <p>Elle désigne un bien qui appartient conjointement à un groupe de personnes plutôt qu'à un individu. Les membres de l'association, réunis en Assemblée Générale, sont responsables de la bonne administration du bien, décident des usages et garantissent qu'il ne soit pas revendu. Ce système s'oppose à la propriété privée et exclusive.</p>
+                    <p>Elle désigne un bien qui appartient conjointement à un groupe de personnes plutôt qu'à un
+                        individu. Les membres de l'association, réunis en Assemblée Générale, sont responsables de la
+                        bonne administration du bien, décident des usages et garantissent qu'il ne soit pas revendu. Ce
+                        système s'oppose à la propriété privée et exclusive.</p>
                 </div>
             </div>
         </div>
@@ -1586,7 +1787,8 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Les Tréteaux du Collet. Tous droits réservés. | Imprimé par nos soins. Ne pas jeter sur la voie publique.</p>
+                <p>&copy; 2026 Les Tréteaux du Collet. Tous droits réservés. | Imprimé par nos soins. Ne pas jeter sur
+                    la voie publique.</p>
             </div>
         </div>
     </footer>
@@ -1604,19 +1806,30 @@
             <button class="modal-close" onclick="closeModal()" aria-label="Fermer">&times;</button>
             <h2>Faire culture commune</h2>
 
-            <p>C'est la dernière mission que s'est donné l'association des Communs de la Cèze pour nous aider à appréhender le paradigme qui se cache derrière le concept de propriété collective. Tout au long de l'automne et de l'hiver, période propice à l'intériorisation et au compostage, les Tréteaux vont s'associer à cette démarche en accueillant un cycle de projections, débats, causeries, arpentage, atelier d'écriture... et autres joyeuses remue-méninges.</p>
+            <p>C'est la dernière mission que s'est donné l'association des Communs de la Cèze pour nous aider à
+                appréhender le paradigme qui se cache derrière le concept de propriété collective. Tout au long de
+                l'automne et de l'hiver, période propice à l'intériorisation et au compostage, les Tréteaux vont
+                s'associer à cette démarche en accueillant un cycle de projections, débats, causeries, arpentage,
+                atelier d'écriture... et autres joyeuses remue-méninges.</p>
 
-            <p>Chaque évènement sera animé par de généreux·euses intervenant·es qui mettront leurs compétences et leur savoir à notre service et tout cela dans la plus grande convivialité comme il se doit au Tréteaux.</p>
+            <p>Chaque évènement sera animé par de généreux·euses intervenant·es qui mettront leurs compétences et leur
+                savoir à notre service et tout cela dans la plus grande convivialité comme il se doit au Tréteaux.</p>
 
-            <p>Nous ouvrons le bal vendredi 9 octobre avec une soirée orchestrée par la famille Florès. Gratitude à Annette et Guy !!</p>
+            <p>Nous ouvrons le bal vendredi 9 octobre avec une soirée orchestrée par la famille Florès. Gratitude à
+                Annette et Guy !!</p>
 
             <h3>Au programme</h3>
             <ul>
-                <li><strong>À 19h :</strong> Annette nous régalera d'un couscous végétarien (n'oubliez pas de réserver avant le 6). Le repas est à prix libre et la totalité des bénéfices iront dans la cagnotte du rachat des Tréteaux du Collet.</li>
-                <li><strong>À 20h30 :</strong> Guy sera aux manettes d'un débat sur les Communs qui suivra la projection du reportage d'Arte questionnant la théorie de Garett Hardin : « Est-il vrai que la propriété collective mène toujours à l'échec ? »</li>
+                <li><strong>À 19h :</strong> Annette nous régalera d'un couscous végétarien (n'oubliez pas de réserver
+                    avant le 6). Le repas est à prix libre et la totalité des bénéfices iront dans la cagnotte du rachat
+                    des Tréteaux du Collet.</li>
+                <li><strong>À 20h30 :</strong> Guy sera aux manettes d'un débat sur les Communs qui suivra la
+                    projection du reportage d'Arte questionnant la théorie de Garett Hardin : « Est-il vrai que la
+                    propriété collective mène toujours à l'échec ? »</li>
             </ul>
 
-            <p><strong>Réservation repas au 06 37 93 88 37 jusqu'au mercredi 6 dernier carat</strong> pour qu'Annette puisse œuvrer en connaissance de cause.</p>
+            <p><strong>Réservation repas au 06 37 93 88 37 jusqu'au mercredi 6 dernier carat</strong> pour qu'Annette
+                puisse œuvrer en connaissance de cause.</p>
         </div>
     </div>
 
@@ -1626,18 +1839,30 @@
             <button class="modal-close" onclick="closeModal()" aria-label="Fermer">&times;</button>
             <h2>Le théâtre participatif, un outil de dialogue communautaire</h2>
 
-            <p>Le Théâtre des opprimé·es (TDO) est un ensemble de techniques de théâtre participatif qui visent à faciliter le dialogue communautaire autour de thématiques sociales. Il invite les participant·es à prendre une part active dans l'analyse des situations et dans la recherche collective d'actions transformatrices.</p>
+            <p>Le Théâtre des opprimé·es (TDO) est un ensemble de techniques de théâtre participatif qui visent à
+                faciliter le dialogue communautaire autour de thématiques sociales. Il invite les participant·es à
+                prendre une part active dans l'analyse des situations et dans la recherche collective d'actions
+                transformatrices.</p>
 
-            <p>L'objectif de ce stage est de permettre aux participant·es de développer une véritable boîte à outils, qu'iels pourront mobiliser au sein de leur communauté ou de leur groupe, afin d'analyser et de transformer collectivement des situations qu'iels souhaitent voir évoluer et ne plus reproduire.</p>
+            <p>L'objectif de ce stage est de permettre aux participant·es de développer une véritable boîte à outils,
+                qu'iels pourront mobiliser au sein de leur communauté ou de leur groupe, afin d'analyser et de
+                transformer collectivement des situations qu'iels souhaitent voir évoluer et ne plus reproduire.</p>
 
-            <p>Dans un premier temps, il s'agira de découvrir les différentes techniques du Théâtre des opprimé·es, de les expérimenter et de se les approprier. Cette première étape permettra ensuite aux participant·es de pouvoir les mettre en pratique, de les transmettre et de les utiliser pour accompagner des dynamiques collectives.</p>
+            <p>Dans un premier temps, il s'agira de découvrir les différentes techniques du Théâtre des opprimé·es, de
+                les expérimenter et de se les approprier. Cette première étape permettra ensuite aux participant·es de
+                pouvoir les mettre en pratique, de les transmettre et de les utiliser pour accompagner des dynamiques
+                collectives.</p>
 
             <h3>Contenu théorique</h3>
             <ul>
-                <li>L'arbre du Théâtre des opprimé·es : découvrir les fondements du TDO : les jeux, le théâtre-image et le théâtre-forum.</li>
-                <li>Les outils de recherche empirique : explorer le théâtre de l'invisible et le théâtre journalistique.</li>
-                <li>Le TDO comme outil de dialogue communautaire : comprendre comment mobiliser ces techniques pour favoriser la réflexion et l'action collectives.</li>
-                <li>Le positionnement de la personne facilitatrice (le·la joker) : explorer son rôle, sa posture et les responsabilités qui lui incombent dans l'accompagnement d'un groupe.</li>
+                <li>L'arbre du Théâtre des opprimé·es : découvrir les fondements du TDO : les jeux, le théâtre-image et
+                    le théâtre-forum.</li>
+                <li>Les outils de recherche empirique : explorer le théâtre de l'invisible et le théâtre
+                    journalistique.</li>
+                <li>Le TDO comme outil de dialogue communautaire : comprendre comment mobiliser ces techniques pour
+                    favoriser la réflexion et l'action collectives.</li>
+                <li>Le positionnement de la personne facilitatrice (le·la joker) : explorer son rôle, sa posture et les
+                    responsabilités qui lui incombent dans l'accompagnement d'un groupe.</li>
             </ul>
 
             <h3>Contenu pratique</h3>
@@ -1651,19 +1876,30 @@
             </ul>
 
             <h3>À qui s'adresse ce stage ?</h3>
-            <p>Ce stage s'adresse à toute personne souhaitant développer des outils ludiques et participatifs pour accompagner le dialogue au sein d'un groupe ou d'une communauté.</p>
-            <p>Ces outils de théâtre participatif peuvent être mobilisés aussi bien pour analyser des situations conflictuelles, injustes ou oppressives que pour imaginer et expérimenter collectivement des alternatives.</p>
-            <p>Aucun prérequis théâtral n'est nécessaire. Le stage repose avant tout sur l'expérimentation, le partage des expériences et la construction collective des savoirs.</p>
+            <p>Ce stage s'adresse à toute personne souhaitant développer des outils ludiques et participatifs pour
+                accompagner le dialogue au sein d'un groupe ou d'une communauté.</p>
+            <p>Ces outils de théâtre participatif peuvent être mobilisés aussi bien pour analyser des situations
+                conflictuelles, injustes ou oppressives que pour imaginer et expérimenter collectivement des
+                alternatives.</p>
+            <p>Aucun prérequis théâtral n'est nécessaire. Le stage repose avant tout sur l'expérimentation, le partage
+                des expériences et la construction collective des savoirs.</p>
 
             <h3>Déroulement du stage</h3>
-            <p>Tout au long du stage, nous construirons collectivement une pièce de théâtre-forum autour de la thématique de l'habiter.</p>
-            <p>Ce processus nous permettra de traverser les différentes étapes de création d'une pièce de théâtre-forum, tout en explorant les outils de facilitation. Chaque participant·e pourra ainsi expérimenter différentes postures : celle de participant·e, impliqué·e dans le processus de création, et celle de facilitateur·ice, accompagnant le groupe dans sa réflexion et sa construction collective.</p>
-            <p>Nous nous retrouverons un week-end par mois. Chaque rencontre sera l'occasion de poursuivre la création de la pièce, d'approfondir la découverte des outils du Théâtre des opprimé·es et de développer progressivement les compétences nécessaires à la facilitation.</p>
+            <p>Tout au long du stage, nous construirons collectivement une pièce de théâtre-forum autour de la
+                thématique de l'habiter.</p>
+            <p>Ce processus nous permettra de traverser les différentes étapes de création d'une pièce de
+                théâtre-forum, tout en explorant les outils de facilitation. Chaque participant·e pourra ainsi
+                expérimenter différentes postures : celle de participant·e, impliqué·e dans le processus de création, et
+                celle de facilitateur·ice, accompagnant le groupe dans sa réflexion et sa construction collective.</p>
+            <p>Nous nous retrouverons un week-end par mois. Chaque rencontre sera l'occasion de poursuivre la création
+                de la pièce, d'approfondir la découverte des outils du Théâtre des opprimé·es et de développer
+                progressivement les compétences nécessaires à la facilitation.</p>
 
             <h3>Horaire et organisation</h3>
             <ul>
                 <li>Samedi et dimanche : 9h30-13h / 14h30-18h</li>
-                <li>Chacun.e ramène quelque chose à partager pour le repas de midi. Une cuisine est disponible sur place.</li>
+                <li>Chacun.e ramène quelque chose à partager pour le repas de midi. Une cuisine est disponible sur
+                    place.</li>
                 <li>Possibilité de dormir sur place.</li>
             </ul>
 
@@ -1688,11 +1924,13 @@
             <button class="modal-close" onclick="closeModal()" aria-label="Fermer">&times;</button>
             <h2>Soirée mensuelle de soutien au rachat des Tréteaux !</h2>
 
-            <p>Tous les 2ème vendredis du mois un·e ou des artistes vont offrir une représentation pour participer au financement du rachat collectif des Tréteaux.</p>
+            <p>Tous les 2ème vendredis du mois un·e ou des artistes vont offrir une représentation pour participer au
+                financement du rachat collectif des Tréteaux.</p>
 
             <p>Tous les bénéfices de ces soirées, entrées seront versées intégralement à la cagnotte du Collet.</p>
 
-            <p>Pour l'occasion, un buffet à prix libre avec une farandole de plats salés et sucrés sera proposé à partir de 19h30.</p>
+            <p>Pour l'occasion, un buffet à prix libre avec une farandole de plats salés et sucrés sera proposé à
+                partir de 19h30.</p>
 
             <p>Ce mois-ci nous accueillons Mireille Huchon pour contribuer à cette folle aventure.</p>
 
@@ -1706,9 +1944,12 @@
             <button class="modal-close" onclick="closeModal()" aria-label="Fermer">&times;</button>
             <h2>Chansons Raw and Wild</h2>
 
-            <p>A la frontière de la performance et de la musique, Marie Baxerres joue des chansons minimales, plutôt pop, parfois absurdes, parfois bruitistes, qui misent aussi bien sur la joie enfantine que sur l'incertitude.</p>
+            <p>A la frontière de la performance et de la musique, Marie Baxerres joue des chansons minimales, plutôt
+                pop, parfois absurdes, parfois bruitistes, qui misent aussi bien sur la joie enfantine que sur
+                l'incertitude.</p>
 
-            <p>Ses chansons sont à la fois accrocheuses et aventureuses, parfois très mélodiques ou dissonantes, parfois bruyantes ou douces, sucré-salé, plaisir hédoniste et danger cathartique...</p>
+            <p>Ses chansons sont à la fois accrocheuses et aventureuses, parfois très mélodiques ou dissonantes, parfois
+                bruyantes ou douces, sucré-salé, plaisir hédoniste et danger cathartique...</p>
         </div>
     </div>
 
@@ -1718,7 +1959,11 @@
             <button class="modal-close" onclick="closeModal()" aria-label="Fermer">&times;</button>
             <h2>On L'a Brun Mérité - Collectif Lakolok</h2>
 
-            <p>Dans un monde où l’ambiance est un peu plombée, comme on dit, des voix manifestent leur envie de résister. On ne saurait dire d’où et de quand surgissent ces singuliers personnages... Mais l’heureuse complicité qui se dégage de cette équipe nous invite à nous laisser porter par sa simplicité, sa sincérité et son enthousiasme à témoigner. Dans une libre adaptation et interprétation de textes, de chansons et de citations, ils nous présentent une lecture avertie d’hier et d’aujourd’hui.</p>
+            <p>Dans un monde où l’ambiance est un peu plombée, comme on dit, des voix manifestent leur envie de
+                résister. On ne saurait dire d’où et de quand surgissent ces singuliers personnages... Mais l’heureuse
+                complicité qui se dégage de cette équipe nous invite à nous laisser porter par sa simplicité, sa
+                sincérité et son enthousiasme à témoigner. Dans une libre adaptation et interprétation de textes, de
+                chansons et de citations, ils nous présentent une lecture avertie d’hier et d’aujourd’hui.</p>
         </div>
     </div>
 
@@ -1729,7 +1974,8 @@
             <h2>Nomade</h2>
 
             <p>Oyez, oyez!</p>
-            <p>Vendredi 21, le groupe Nomade posera ses valises aux Tréteaux le temps d'un concert dédié aux monuments de la chanson française mais pas que...</p>
+            <p>Vendredi 21, le groupe Nomade posera ses valises aux Tréteaux le temps d'un concert dédié aux monuments
+                de la chanson française mais pas que...</p>
             <ul>
                 <li>Restauration à la bonne franquette partir de 19h : saucisses, merguez, frites et glaces !</li>
                 <li>Concert à 21h</li>
@@ -1744,11 +1990,15 @@
             <button class="modal-close" onclick="closeModal()" aria-label="Fermer">&times;</button>
             <h2>Zeuplèce to Death / Le Discours du Chef Seattle</h2>
 
-            <p>Quand il fut prononcé en 1854, ce discours d’un chef indien connut diverses traductions par des missionnaires et par des militaires. Il s’en suivit deux formes de censures, l’une religieuse, l’autre stratégique.</p>
+            <p>Quand il fut prononcé en 1854, ce discours d’un chef indien connut diverses traductions par des
+                missionnaires et par des militaires. Il s’en suivit deux formes de censures, l’une religieuse, l’autre
+                stratégique.</p>
 
-            <p>« Apprenez à vos enfants ce que nous avons toujours appris aux nôtres, que la terre est notre mère et que ce qui advient à la terre, advient aux fils de la terre. »</p>
+            <p>« Apprenez à vos enfants ce que nous avons toujours appris aux nôtres, que la terre est notre mère et
+                que ce qui advient à la terre, advient aux fils de la terre. »</p>
 
-            <p>Eric Derrien s’est documenté depuis des années sur les différentes versions du texte du chef Seattle et a essayé de nous retranscrire une version sans influence militaire ou religieuse.</p>
+            <p>Eric Derrien s’est documenté depuis des années sur les différentes versions du texte du chef Seattle et a
+                essayé de nous retranscrire une version sans influence militaire ou religieuse.</p>
         </div>
     </div>
 
@@ -1760,16 +2010,20 @@
 
             <p>La Mondina c'est un tour d'horizon d'une chanson réaliste sans frontières en mode tout terrain.</p>
 
-            <p>Un hommage à une chanson abrasive, poignante ou drôle qui se tient sur le fil du rasoir de la marge. La voix des sans voix, souvent féminine, qui met dans le swing de la java ou dans la gouaille du blues toute sa colère, son désespoir et sa rage de vivre.</p>
+            <p>Un hommage à une chanson abrasive, poignante ou drôle qui se tient sur le fil du rasoir de la marge. La
+                voix des sans voix, souvent féminine, qui met dans le swing de la java ou dans la gouaille du blues
+                toute sa colère, son désespoir et sa rage de vivre.</p>
 
-            <p>Un monde qui pleure et qui rit mais qui ne fait ni dans la demi mesure, ni dans le politiquement correct.</p>
+            <p>Un monde qui pleure et qui rit mais qui ne fait ni dans la demi mesure, ni dans le politiquement
+                correct.</p>
 
             <p>À bon entendeur...</p>
 
             <p><strong>Philippe Metton :</strong> guitare et accordéon</p>
             <p><strong>Karine Frostin :</strong> chant</p>
 
-            <p><em>Les bénéfices du concert seront versés au pot collectif dédié au rachat du Collet et ses Tréteaux.</em></p>
+            <p><em>Les bénéfices du concert seront versés au pot collectif dédié au rachat du Collet et ses
+                    Tréteaux.</em></p>
         </div>
     </div>
 
@@ -1796,15 +2050,27 @@
 
             <p>C’est autour de Christiane Raby que c’est créé le groupe Double Scott et Triple Scott.</p>
 
-            <p>D’origine québécoise, elle explore le jazz, la soul et le folk durant ses études musicales à Montréal, « Vanier college » en chant. En 1990, elle intègre pour plusieurs années le groupe vocal a capella La bande Magnétik. Le groupe est nominé au Félix et fait de nombreuses tournées au Québec et en Europe.</p>
+            <p>D’origine québécoise, elle explore le jazz, la soul et le folk durant ses études musicales à Montréal, «
+                Vanier college » en chant. En 1990, elle intègre pour plusieurs années le groupe vocal a capella La
+                bande Magnétik. Le groupe est nominé au Félix et fait de nombreuses tournées au Québec et en Europe.</p>
 
-            <p>Auteure compositeur, elle signe en 2000 un contrat de disque avec la compagnie MusiArt et sort en 2001 l’album « Si tu passes tout droit ». En parallèle, elle fait aussi de nombreux contrats de pigistes en tant que choriste sur scène et en studio.</p>
+            <p>Auteure compositeur, elle signe en 2000 un contrat de disque avec la compagnie MusiArt et sort en 2001
+                l’album « Si tu passes tout droit ». En parallèle, elle fait aussi de nombreux contrats de pigistes en
+                tant que choriste sur scène et en studio.</p>
 
-            <p>En 2003, elle s’établit en France et a depuis la double nationalité. Elle forme avec Bernard Scotti le duo qui deviendra : Double Scott. Il sortent leur premier album : « Trait d’union » en février 2011. Et un deuxième en 2014 du nom de Double Scott. Depuis quelques années ils créent : Triple Scott avec Maéva Scotti à la basse.</p>
+            <p>En 2003, elle s’établit en France et a depuis la double nationalité. Elle forme avec Bernard Scotti le
+                duo qui deviendra : Double Scott. Il sortent leur premier album : « Trait d’union » en février 2011. Et
+                un deuxième en 2014 du nom de Double Scott. Depuis quelques années ils créent : Triple Scott avec Maéva
+                Scotti à la basse.</p>
 
-            <p>C’est donc une histoire familiale. En concert, le groupe chante les chansons de Christiane, tenté de Jazz, de Folk, et de textes qui évoquent très intelligemment et sensiblement le monde tel qu’il est. La technique vocale très assurée de Christiane, qui joue également successivement de la guitare, du piano, de la flûte traversière, est appuyée par la virtuosité de Bernard Scotti, et par la basse de Maéva qui ajoute une touche de profondeur à la musique.</p>
+            <p>C’est donc une histoire familiale. En concert, le groupe chante les chansons de Christiane, tenté de
+                Jazz, de Folk, et de textes qui évoquent très intelligemment et sensiblement le monde tel qu’il est. La
+                technique vocale très assurée de Christiane, qui joue également successivement de la guitare, du piano,
+                de la flûte traversière, est appuyée par la virtuosité de Bernard Scotti, et par la basse de Maéva qui
+                ajoute une touche de profondeur à la musique.</p>
 
-            <p><a href="https://youtu.be/IzScF5lJZIU" target="_blank" style="color: var(--rose); text-decoration: underline;">Voir la vidéo sur YouTube</a></p>
+            <p><a href="https://youtu.be/IzScF5lJZIU" target="_blank"
+                    style="color: var(--rose); text-decoration: underline;">Voir la vidéo sur YouTube</a></p>
         </div>
     </div>
 
@@ -1918,6 +2184,13 @@
                 closeLightbox();
                 closeModal();
             }
+        });
+
+        // ================= FERMER LE MENU AU CLIC SUR UN LIEN =================
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('nav').classList.remove('active');
+            });
         });
     </script>
 </body>
