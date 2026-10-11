@@ -557,7 +557,7 @@
 
         .carte-event-titre {
             font-size: 1.1rem;
-            margin-bottom: -0.5rem;
+            margin-bottom: 0.15rem;   /* était -0.5rem : espace propre et prévisible */
             color: var(--noir);
             word-wrap: break-word;
             overflow-wrap: break-word;
@@ -571,7 +571,7 @@
             word-wrap: break-word;
             overflow-wrap: break-word;
             line-height: 1.35;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.15rem;   /* était 0.25rem */
         }
 
         .carte-event-tag {
@@ -588,7 +588,7 @@
 
         .btn-info-event {
             display: inline-block;
-            margin-top: 0.5rem;
+            margin-top: 0.15rem;      /* était 0.5rem : rapproche du titre/desc */
             padding: 0.3rem 0.7rem;
             background-color: var(--rose);
             color: var(--blanc);
@@ -1211,12 +1211,12 @@
             }
 
             .carte-event-titre {
-                margin-bottom: 0.35rem;
+                margin-bottom: 0.2rem;    /* était 0.35rem */
             }
 
             .carte-event-desc {
                 flex-grow: 0;
-                margin-bottom: 0.5rem;
+                margin-bottom: 0.25rem;   /* était 0.5rem */
             }
 
             .carte-event-tag {
@@ -1225,7 +1225,7 @@
             }
 
             .btn-info-event {
-                margin-top: 0.4rem;
+                margin-top: 0.15rem;      /* était 0.4rem */
                 margin-bottom: 0.2rem;
             }
 
@@ -1368,6 +1368,7 @@
             .btn-info-event {
                 font-size: 0.6rem;
                 padding: 0.25rem 0.6rem;
+                margin-top: 0.1rem;       /* idem, resserré */
             }
 
             .hero h1 {
