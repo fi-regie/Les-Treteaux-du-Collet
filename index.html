@@ -395,7 +395,8 @@
 
         .hero h1 {
             font-size: clamp(2rem, 8vw, 4rem);
-            color: var(--blanc);
+            /* ✅ CORRECTION : texte clair dans les deux thèmes */
+            color: var(--texte-clair);
             margin-bottom: 1rem;
             text-shadow: 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.8);
             word-wrap: break-word;
@@ -405,6 +406,8 @@
 
         .hero p {
             font-size: clamp(1rem, 4vw, 1.5rem);
+            /* ✅ CORRECTION : texte clair dans les deux thèmes */
+            color: var(--texte-clair);
             margin-bottom: 0;
             text-shadow: 0.0625rem 0.0625rem 0.25rem rgba(0, 0, 0, 0.8);
             word-wrap: break-word;
