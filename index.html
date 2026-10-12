@@ -57,6 +57,7 @@
 
             /* Hauteur du header pour le padding du body (desktop) */
             --header-height: 5.5rem;
+            
             /* Hauteur fixe des cartes événements (desktop uniquement) */
             --carte-event-height: 35rem;
         }
@@ -108,7 +109,6 @@
             transition: var(--transition-theme);
             min-height: 100vh;
             margin: 0;
-            /* Padding-top pour compenser le header fixe */
             padding: var(--header-height) 0 0 0;
             width: 100%;
             max-width: 100vw;
@@ -138,7 +138,6 @@
             display: block;
         }
 
-        /* Décalage pour les ancres : évite que le header fixe masque le début des sections */
         section[id] {
             scroll-margin-top: var(--header-height);
         }
@@ -510,7 +509,6 @@
             box-shadow: 0 0.625rem 1.5625rem var(--ombre-forte);
         }
 
-        /* Image : hauteur FIXE = 2/3 de la carte, ne varie jamais */
         .carte-event img {
             width: 100%;
             height: 66.666%;
@@ -537,7 +535,6 @@
             background-color: #2b2f33;
         }
 
-        /* Contenu texte : occupe l'espace restant (1/3), s'adapte au contenu */
         .carte-event-contenu {
             padding: 0.75rem 1rem 0.4rem;
             flex: 1 1 33.333%;
@@ -1171,7 +1168,6 @@
                 grid-template-columns: 1fr;
             }
 
-            /* Cartes programmation mobile : image à hauteur fixe en rem */
             .carte-event {
                 height: auto;
                 min-height: 0;
@@ -1308,7 +1304,7 @@
                 justify-content: center;
             }
 
-            /* Image de fond mobile + ajustement fixed */
+            /* Image de fond mobile */
             body {
                 background-image: url('https://raw.githubusercontent.com/fi-regie/Les-Treteaux-du-Collet/main/images/Ente%CC%82te%20mobile.jpg');
                 background-attachment: scroll;
@@ -1489,7 +1485,7 @@
                     </div>
                 </div>
                 <div class="carte-event">
-                    <img src="./images/825286566_1134039902618385_542225041952631897_n.jpg" alt="Affiche Octobre"
+                    <img src="./images/CHTOLOGO.jpg" alt="Affiche Octobre"
                         onclick="openLightbox(this.src, this.alt)">
                     <div class="carte-event-contenu">
                         <div class="carte-event-date">Samedi 31 - 20h30</div>
