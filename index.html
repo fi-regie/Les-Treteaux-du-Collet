@@ -143,6 +143,14 @@
         }
 
         /* =========================================
+           IMAGE DE FOND MOBILE — CACHÉE PAR DÉFAUT
+           (utilisée uniquement via media query mobile)
+           ========================================= */
+        .bg-mobile {
+            display: none;
+        }
+
+        /* =========================================
            TYPOGRAPHIE & UTILITAIRES
            ========================================= */
         h1,
@@ -1101,6 +1109,41 @@
                 --carte-event-height: auto;
             }
 
+            /* =========================================
+               FOND MOBILE : on désactive le background-image
+               du body et on utilise une vraie balise <img>
+               ========================================= */
+            body {
+                background-image: none;
+                background-color: #2b2f33;
+                background-attachment: scroll;
+                text-shadow: none;
+                /* ← retire le text-shadow qui force un calque flou sur iOS */
+            }
+
+            /* La balise <img> devient le fond plein écran */
+            .bg-mobile {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center 30%;
+                z-index: -1;
+                pointer-events: none;
+                /* -webkit-user-select: none; */
+            }
+
+            /* Header mobile : on désactive le backdrop-filter
+               qui provoque un flou propagé sur iOS */
+            header {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background-color: rgba(30, 30, 30, 0.95);
+            }
+
             /* Header mobile */
             .header-content {
                 flex-direction: row;
@@ -1307,17 +1350,6 @@
             .social-icons {
                 justify-content: center;
             }
-
-            /* =========================================
-               IMAGE DE FOND MOBILE — version dédiée portrait
-               ========================================= */
-            body {
-                background-image: url('https://raw.githubusercontent.com/fi-regie/Les-Treteaux-du-Collet/main/images/Ente%CC%82te-mobil-2.jpg');
-                background-attachment: scroll;
-                background-size: cover;
-                background-position: center 30%;
-                background-repeat: no-repeat;
-            }
         }
 
         @media (max-width: 400px) {
@@ -1377,6 +1409,11 @@
 </head>
 
 <body>
+
+    <!-- ================= IMAGE DE FOND MOBILE ================= -->
+    <!-- Cette balise n'apparaît que sur mobile (voir CSS .bg-mobile) -->
+    <img src="https://raw.githubusercontent.com/fi-regie/Les-Treteaux-du-Collet/main/images/Ente%CC%82te-mobil-2.jpg"
+        class="bg-mobile" alt="" aria-hidden="true">
 
     <!-- ================= HEADER ================= -->
     <header>
