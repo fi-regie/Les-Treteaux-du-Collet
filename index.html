@@ -57,7 +57,7 @@
 
             /* Hauteur du header pour le padding du body (desktop) */
             --header-height: 5.5rem;
-
+            
             /* Hauteur fixe des cartes événements (desktop uniquement) */
             --carte-event-height: 35rem;
         }
@@ -109,6 +109,7 @@
             transition: var(--transition-theme);
             min-height: 100vh;
             margin: 0;
+            /* Padding-top pour compenser le header fixe */
             padding: var(--header-height) 0 0 0;
             width: 100%;
             max-width: 100vw;
@@ -145,10 +146,7 @@
         /* =========================================
            TYPOGRAPHIE & UTILITAIRES
            ========================================= */
-        h1,
-        h2,
-        h3,
-        h4 {
+        h1, h2, h3, h4 {
             font-family: var(--font-titre);
             color: var(--noir);
             margin-bottom: 1rem;
@@ -571,12 +569,12 @@
             word-wrap: break-word;
             overflow-wrap: break-word;
             line-height: 1.35;
-            margin: 0;
+            margin: 0;           
         }
 
         .btn-info-event {
             display: inline-block;
-            margin-top: 1rem;
+            margin-top: 1rem;      
             padding: 0.3rem 0.7rem;
             background-color: var(--rose);
             color: var(--blanc);
@@ -1080,7 +1078,6 @@
         }
 
         @media (max-width: 900px) {
-
             .le-lieu-grid,
             .projet-grid {
                 grid-template-columns: 1fr;
@@ -1437,14 +1434,14 @@
             <!-- Octobre -->
             <h3 class="mois-titre">Octobre 2026</h3>
             <div class="grille-evenements">
-
+                
                 <div class="carte-event">
                     <img src="https://raw.githubusercontent.com/fi-regie/Les-Treteaux-du-Collet/main/images/Prog%20Octobre.jpg"
                         alt="Affiche Scène Ouverte" onclick="openLightbox(this.src, this.alt)">
                     <div class="carte-event-contenu">
                         <div class="carte-event-date">Octobre 2026</div>
                         <h4 class="carte-event-titre">programme</h4>
-                        <p class="carte-event-desc"> </p>
+                        <p class="carte-event-desc">  </p>
                     </div>
                 </div>
 
@@ -1488,247 +1485,233 @@
                         <p class="carte-event-desc">Découverte, initiation, perfectionnement.</p>
                     </div>
                 </div>
-
                 <div class="carte-event">
-                    <img src="https://raw.githubusercontent.com/fi-regie/Les-Treteaux-du-Collet/main/images/CHTOLOGO.jpeg"
-                        alt="Affiche Octobre" onclick="openLightbox(this.src, this.alt)">
+                    <img src="./images/825286566_1134039902618385_542225041952631897_n.jpg" alt="Affiche Octobre"
+                        onclick="openLightbox(this.src, this.alt)">
                     <div class="carte-event-contenu">
                         <div class="carte-event-date">Samedi 31 - 20h30</div>
                         <h4 class="carte-event-titre">CHTOLÔGO</h4>
                         <p class="carte-event-desc">Concert loufopoetikopolitik.</p>
                     </div>
                 </div>
-                
-                <!-- Septembre -->
-                <h3 class="mois-titre">Septembre 2026</h3>
-                <div class="grille-evenements">
-                    <div class="carte-event">
-                        <img src="https://raw.githubusercontent.com/fi-regie/Les-Treteaux-du-Collet/main/images/Sce%CC%80ne%20ouverte.jpg"
-                            alt="Affiche Scène Ouverte" onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Vendredi 4 - 20h30</div>
-                            <h4 class="carte-event-titre">Scène Ouverte</h4>
-                            <p class="carte-event-desc">10 minutes pour entrer dans l'histoire. Ouverture 19h.</p>
-                        </div>
-                    </div>
+            </div>
 
-                    <div class="carte-event">
-                        <img src="./images/Echec.jpg" alt="Affiche ÉCHECS" onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Dimanche 6 - 17h</div>
-                            <h4 class="carte-event-titre">ÉCHECS</h4>
-                            <p class="carte-event-desc">Découverte, initiation, perfectionnement.</p>
-                        </div>
-                    </div>
-
-                    <div class="carte-event">
-                        <img src="./images/Septembre%203.jpg" alt="Affiche Septembre 3"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Vendredi 11 - 21h</div>
-                            <h4 class="carte-event-titre">Madame Pan et ses Troglydytes</h4>
-                            <p class="carte-event-desc">Théâtre. Coup de soutien aux Tréteaux.</p>
-                            <button class="btn-info-event" onclick="openModal('modal-madame-pan')">En savoir
-                                plus</button>
-                        </div>
-                    </div>
-
-                    <div class="carte-event">
-                        <img src="./images/Septembre%204.jpg" alt="Affiche Septembre 4"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Mercredi 16 - 18h30</div>
-                            <h4 class="carte-event-titre">CINÉ-PHILO</h4>
-                            <p class="carte-event-desc">Film, débat et repas partagé.</p>
-                        </div>
-                    </div>
-                    <div class="carte-event">
-                        <img src="./images/792585231_1103110735711302_2362863429566822929_n.jpg" alt="Affiche Septembre"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Samedi 19 - 21h</div>
-                            <h4 class="carte-event-titre">JEWA (rap-ragga)</h4>
-                            <p class="carte-event-desc">Concert. Énergie garantie !</p>
-                        </div>
-                    </div>
-                    <div class="carte-event">
-                        <img src="./images/Echec.jpg" alt="Affiche ÉCHECS" onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Dimanche 20 - 17h</div>
-                            <h4 class="carte-event-titre">ÉCHECS</h4>
-                            <p class="carte-event-desc">Découverte, initiation, perfectionnement.</p>
-                        </div>
-                    </div>
-                    <div class="carte-event">
-                        <img src="./images/797625286_1120553637300345_75986086404492470_n.jpg" alt="Affiche Arpentage"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Mercredi 23 - 18h-20h</div>
-                            <h4 class="carte-event-titre">ARPENTAGE du livre "Résister"</h4>
-                            <p class="carte-event-desc">Lecture collective de Salomé Saqué, suivie d'un repas partagé.
-                            </p>
-                        </div>
+            <!-- Septembre -->
+            <h3 class="mois-titre">Septembre 2026</h3>
+            <div class="grille-evenements">
+                <div class="carte-event">
+                    <img src="https://raw.githubusercontent.com/fi-regie/Les-Treteaux-du-Collet/main/images/Sce%CC%80ne%20ouverte.jpg"
+                        alt="Affiche Scène Ouverte" onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Vendredi 4 - 20h30</div>
+                        <h4 class="carte-event-titre">Scène Ouverte</h4>
+                        <p class="carte-event-desc">10 minutes pour entrer dans l'histoire. Ouverture 19h.</p>
                     </div>
                 </div>
 
-                <!-- Août -->
-                <h3 class="mois-titre">Août 2026</h3>
-                <div class="grille-evenements">
-                    <div class="carte-event">
-                        <img src="./images/Aout%202.jpg" alt="Affiche Août 2"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Samedi 1er - 21h</div>
-                            <h4 class="carte-event-titre">Triple Scott</h4>
-                            <p class="carte-event-desc">Chanson française et jazz.</p>
-                            <button class="btn-info-event" onclick="openModal('modal-triple-scott')">En savoir
-                                plus</button>
-                        </div>
-                    </div>
-                    <div class="carte-event">
-                        <img src="./images/Aout%203.jpg" alt="Affiche Août 3"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Mardi 4 - 21h</div>
-                            <h4 class="carte-event-titre">Paniyiri</h4>
-                            <p class="carte-event-desc">Musique grecque envoûtante.</p>
-                            <button class="btn-info-event" onclick="openModal('modal-paniyiri')">En savoir plus</button>
-                        </div>
-                    </div>
-                    <div class="carte-event">
-                        <img src="./images/Aout%204.jpg" alt="Affiche Août 4"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Samedi 8 - 21h</div>
-                            <h4 class="carte-event-titre">La Mondina</h4>
-                            <p class="carte-event-desc">Chanson réaliste. Concert au profit du rachat des Tréteaux.</p>
-                            <button class="btn-info-event" onclick="openModal('modal-la-mondina')">En savoir
-                                plus</button>
-                        </div>
-                    </div>
-                    <div class="carte-event">
-                        <img src="./images/Aout%205.jpg" alt="Affiche Août 5"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Vendredi 14 - 20h</div>
-                            <h4 class="carte-event-titre">Zeuplèce to Death / Le Discours du Chef Seattle</h4>
-                            <p class="carte-event-desc">Clown puis causerie avec Eric Derrien.</p>
-                            <button class="btn-info-event" onclick="openModal('modal-zeuplace')">En savoir plus</button>
-                        </div>
-                    </div>
-                    <div class="carte-event">
-                        <img src="./images/Aout%206.jpg" alt="Affiche Août 6"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Vendredi 21 - 21h</div>
-                            <h4 class="carte-event-titre">Nomade</h4>
-                            <p class="carte-event-desc">Dîner / Chanson française.</p>
-                            <button class="btn-info-event" onclick="openModal('modal-nomade')">En savoir plus</button>
-                        </div>
-                    </div>
-                    <div class="carte-event">
-                        <img src="./images/Aout%208.jpg" alt="Affiche Août 8"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Jeudi 27 - 21h</div>
-                            <h4 class="carte-event-titre">Marie Baxerres</h4>
-                            <p class="carte-event-desc">Chanson "Raw and Wild".</p>
-                            <button class="btn-info-event" onclick="openModal('modal-marie-baxerres')">En savoir
-                                plus</button>
-                        </div>
-                    </div>
-                    <div class="carte-event">
-                        <img src="./images/Aout%207.jpg" alt="Affiche Août 7"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Samedi 29 - 21h</div>
-                            <h4 class="carte-event-titre">On l'a brun mérité</h4>
-                            <p class="carte-event-desc">Théâtre par le Collectif Lakolok.</p>
-                            <button class="btn-info-event" onclick="openModal('modal-on-la-brun-merite')">En savoir
-                                plus</button>
-                        </div>
+                <div class="carte-event">
+                    <img src="./images/Echec.jpg" alt="Affiche ÉCHECS" onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Dimanche 6 - 17h</div>
+                        <h4 class="carte-event-titre">ÉCHECS</h4>
+                        <p class="carte-event-desc">Découverte, initiation, perfectionnement.</p>
                     </div>
                 </div>
 
-                <!-- Juillet -->
-                <h3 class="mois-titre">Juillet 2026</h3>
-                <div class="grille-evenements">
-                    <div class="carte-event">
-                        <img src="https://raw.githubusercontent.com/fi-regie/Les-Treteaux-du-Collet/main/images/Sce%CC%80ne%20ouverte.jpg"
-                            alt="Affiche Scène Ouverte" onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Vendredi 3 - 21h</div>
-                            <h4 class="carte-event-titre">Scène Ouverte</h4>
-                            <p class="carte-event-desc">10 minutes pour entrer dans l'histoire. Venez nombreux partager
-                                un
-                                moment unique.</p>
-                        </div>
+                <div class="carte-event">
+                    <img src="./images/Septembre%203.jpg" alt="Affiche Septembre 3"
+                        onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Vendredi 11 - 21h</div>
+                        <h4 class="carte-event-titre">Madame Pan et ses Troglydytes</h4>
+                        <p class="carte-event-desc">Théâtre. Coup de soutien aux Tréteaux.</p>
+                        <button class="btn-info-event" onclick="openModal('modal-madame-pan')">En savoir plus</button>
                     </div>
-                    <div class="carte-event">
-                        <img src="./images/Juillet%202.jpg" alt="Affiche Juillet 2"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Samedi 4 - 21h</div>
-                            <h4 class="carte-event-titre">Soirée ESSEIROT</h4>
-                            <p class="carte-event-desc">Une soirée conviviale et culturelle à ne pas manquer.</p>
-                        </div>
+                </div>
+
+                <div class="carte-event">
+                    <img src="./images/Septembre%204.jpg" alt="Affiche Septembre 4"
+                        onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Mercredi 16 - 18h30</div>
+                        <h4 class="carte-event-titre">CINÉ-PHILO</h4>
+                        <p class="carte-event-desc">Film, débat et repas partagé.</p>
                     </div>
-                    <div class="carte-event">
-                        <img src="./images/Juillet%203.jpg" alt="Affiche Juillet 3"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Mercredi 8 - 21h</div>
-                            <h4 class="carte-event-titre">Fanfare Le Grand Boucan</h4>
-                            <p class="carte-event-desc">Une fanfare explosive pour animer la soirée !</p>
-                        </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/792585231_1103110735711302_2362863429566822929_n.jpg" alt="Affiche Septembre"
+                        onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Samedi 19 - 21h</div>
+                        <h4 class="carte-event-titre">JEWA (rap-ragga)</h4>
+                        <p class="carte-event-desc">Concert. Énergie garantie !</p>
                     </div>
-                    <div class="carte-event">
-                        <img src="./images/Juillet%204.jpg" alt="Affiche Juillet 4"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Vendredi 10 - 21h</div>
-                            <h4 class="carte-event-titre">Concert Poétique</h4>
-                            <p class="carte-event-desc">Un voyage entre mots et mélodies.</p>
-                        </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/Echec.jpg" alt="Affiche ÉCHECS" onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Dimanche 20 - 17h</div>
+                        <h4 class="carte-event-titre">ÉCHECS</h4>
+                        <p class="carte-event-desc">Découverte, initiation, perfectionnement.</p>
                     </div>
-                    <div class="carte-event">
-                        <img src="./images/juillet%205.jpg" alt="Affiche Juillet 5"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Samedi 11 - 21h</div>
-                            <h4 class="carte-event-titre">Matin Brun</h4>
-                            <p class="carte-event-desc">Théâtre-Débat par la Compagnie ToutCour.</p>
-                        </div>
-                    </div>
-                    <div class="carte-event">
-                        <img src="./images/Juillet%201.jpg" alt="Affiche Juillet 1"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Samedi 18 - 20h</div>
-                            <h4 class="carte-event-titre">Histoires & Chansons de nos Montagnes</h4>
-                            <p class="carte-event-desc">Conteur/musicien avec Paul Roy.</p>
-                        </div>
-                    </div>
-                    <div class="carte-event">
-                        <img src="./images/Juillet%202.jpg" alt="Affiche Juillet 2"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Jeudi 23 - 21h</div>
-                            <h4 class="carte-event-titre">Délires Flagrants</h4>
-                            <p class="carte-event-desc">Lecture théâtralisée.</p>
-                        </div>
-                    </div>
-                    <div class="carte-event">
-                        <img src="./images/Juillet%203.jpg" alt="Affiche Juillet 3"
-                            onclick="openLightbox(this.src, this.alt)">
-                        <div class="carte-event-contenu">
-                            <div class="carte-event-date">Vendredi 24 - 21h</div>
-                            <h4 class="carte-event-titre">Concert Jazz Swing Pulse</h4>
-                            <p class="carte-event-desc">Concert de jazz pour clôturer le mois en beauté.</p>
-                        </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/797625286_1120553637300345_75986086404492470_n.jpg" alt="Affiche Arpentage"
+                        onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Mercredi 23 - 18h-20h</div>
+                        <h4 class="carte-event-titre">ARPENTAGE du livre "Résister"</h4>
+                        <p class="carte-event-desc">Lecture collective de Salomé Saqué, suivie d'un repas partagé.</p>
                     </div>
                 </div>
             </div>
+
+            <!-- Août -->
+            <h3 class="mois-titre">Août 2026</h3>
+            <div class="grille-evenements">
+                <div class="carte-event">
+                    <img src="./images/Aout%202.jpg" alt="Affiche Août 2" onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Samedi 1er - 21h</div>
+                        <h4 class="carte-event-titre">Triple Scott</h4>
+                        <p class="carte-event-desc">Chanson française et jazz.</p>
+                        <button class="btn-info-event" onclick="openModal('modal-triple-scott')">En savoir plus</button>
+                    </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/Aout%203.jpg" alt="Affiche Août 3" onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Mardi 4 - 21h</div>
+                        <h4 class="carte-event-titre">Paniyiri</h4>
+                        <p class="carte-event-desc">Musique grecque envoûtante.</p>
+                        <button class="btn-info-event" onclick="openModal('modal-paniyiri')">En savoir plus</button>
+                    </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/Aout%204.jpg" alt="Affiche Août 4" onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Samedi 8 - 21h</div>
+                        <h4 class="carte-event-titre">La Mondina</h4>
+                        <p class="carte-event-desc">Chanson réaliste. Concert au profit du rachat des Tréteaux.</p>
+                        <button class="btn-info-event" onclick="openModal('modal-la-mondina')">En savoir plus</button>
+                    </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/Aout%205.jpg" alt="Affiche Août 5" onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Vendredi 14 - 20h</div>
+                        <h4 class="carte-event-titre">Zeuplèce to Death / Le Discours du Chef Seattle</h4>
+                        <p class="carte-event-desc">Clown puis causerie avec Eric Derrien.</p>
+                        <button class="btn-info-event" onclick="openModal('modal-zeuplace')">En savoir plus</button>
+                    </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/Aout%206.jpg" alt="Affiche Août 6" onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Vendredi 21 - 21h</div>
+                        <h4 class="carte-event-titre">Nomade</h4>
+                        <p class="carte-event-desc">Dîner / Chanson française.</p>
+                        <button class="btn-info-event" onclick="openModal('modal-nomade')">En savoir plus</button>
+                    </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/Aout%208.jpg" alt="Affiche Août 8" onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Jeudi 27 - 21h</div>
+                        <h4 class="carte-event-titre">Marie Baxerres</h4>
+                        <p class="carte-event-desc">Chanson "Raw and Wild".</p>
+                        <button class="btn-info-event" onclick="openModal('modal-marie-baxerres')">En savoir plus</button>
+                    </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/Aout%207.jpg" alt="Affiche Août 7" onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Samedi 29 - 21h</div>
+                        <h4 class="carte-event-titre">On l'a brun mérité</h4>
+                        <p class="carte-event-desc">Théâtre par le Collectif Lakolok.</p>
+                        <button class="btn-info-event" onclick="openModal('modal-on-la-brun-merite')">En savoir plus</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Juillet -->
+            <h3 class="mois-titre">Juillet 2026</h3>
+            <div class="grille-evenements">
+                <div class="carte-event">
+                    <img src="https://raw.githubusercontent.com/fi-regie/Les-Treteaux-du-Collet/main/images/Sce%CC%80ne%20ouverte.jpg"
+                        alt="Affiche Scène Ouverte" onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Vendredi 3 - 21h</div>
+                        <h4 class="carte-event-titre">Scène Ouverte</h4>
+                        <p class="carte-event-desc">10 minutes pour entrer dans l'histoire. Venez nombreux partager un
+                            moment unique.</p>
+                    </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/Juillet%202.jpg" alt="Affiche Juillet 2"
+                        onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Samedi 4 - 21h</div>
+                        <h4 class="carte-event-titre">Soirée ESSEIROT</h4>
+                        <p class="carte-event-desc">Une soirée conviviale et culturelle à ne pas manquer.</p>
+                    </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/Juillet%203.jpg" alt="Affiche Juillet 3"
+                        onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Mercredi 8 - 21h</div>
+                        <h4 class="carte-event-titre">Fanfare Le Grand Boucan</h4>
+                        <p class="carte-event-desc">Une fanfare explosive pour animer la soirée !</p>
+                    </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/Juillet%204.jpg" alt="Affiche Juillet 4"
+                        onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Vendredi 10 - 21h</div>
+                        <h4 class="carte-event-titre">Concert Poétique</h4>
+                        <p class="carte-event-desc">Un voyage entre mots et mélodies.</p>
+                    </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/juillet%205.jpg" alt="Affiche Juillet 5"
+                        onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Samedi 11 - 21h</div>
+                        <h4 class="carte-event-titre">Matin Brun</h4>
+                        <p class="carte-event-desc">Théâtre-Débat par la Compagnie ToutCour.</p>
+                    </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/Juillet%201.jpg" alt="Affiche Juillet 1"
+                        onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Samedi 18 - 20h</div>
+                        <h4 class="carte-event-titre">Histoires & Chansons de nos Montagnes</h4>
+                        <p class="carte-event-desc">Conteur/musicien avec Paul Roy.</p>
+                    </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/Juillet%202.jpg" alt="Affiche Juillet 2"
+                        onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Jeudi 23 - 21h</div>
+                        <h4 class="carte-event-titre">Délires Flagrants</h4>
+                        <p class="carte-event-desc">Lecture théâtralisée.</p>
+                    </div>
+                </div>
+                <div class="carte-event">
+                    <img src="./images/Juillet%203.jpg" alt="Affiche Juillet 3"
+                        onclick="openLightbox(this.src, this.alt)">
+                    <div class="carte-event-contenu">
+                        <div class="carte-event-date">Vendredi 24 - 21h</div>
+                        <h4 class="carte-event-titre">Concert Jazz Swing Pulse</h4>
+                        <p class="carte-event-desc">Concert de jazz pour clôturer le mois en beauté.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- ================= LE LIEU ================= -->
@@ -1790,8 +1773,7 @@
 
                     <h3 style="margin-top: 1.875rem;">Comment puis-je donner ?</h3>
                     <ul>
-                        <li>Via notre page HelloAsso : <a href="#"
-                                style="color: var(--vert); text-decoration: underline;">Lien vers la collecte</a></li>
+                        <li>Via notre page HelloAsso : <a href="#" style="color: var(--vert); text-decoration: underline;">Lien vers la collecte</a></li>
                         <li>En espèces ou chèque à l'ordre de : « association Les Communs de la Cèze ».</li>
                         <li>Par virement (demandez-nous notre RIB).</li>
                         <li>Par CB (terminal accessible aux Tréteaux).</li>
@@ -2151,7 +2133,7 @@
     <!-- ================= SCRIPT ================= -->
     <script>
         // ================= GESTION DU THÈME (MODE CLAIR PAR DÉFAUT) =================
-        (function () {
+        (function() {
             const themeToggle = document.getElementById('themeToggle');
             const body = document.body;
 
@@ -2174,7 +2156,7 @@
                 }
             }
 
-            themeToggle.addEventListener('click', function () {
+            themeToggle.addEventListener('click', function() {
                 const isDark = body.classList.toggle('dark-mode');
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
                 updateThemeButton(isDark);
